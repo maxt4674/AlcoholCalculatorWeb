@@ -7,7 +7,9 @@ import {
   Route,
 } from "react-router-dom";
 import Home from './pages/homepage';
+import Navbar from './components/navbar/navbarElements';
 import Calculators from './pages/calculatorsPage';
+import Footer from './components/footer/footer';
 
 function App() {
   const [pages, setPages] = useState([]);
@@ -23,6 +25,7 @@ function App() {
 
   return (
     <Router>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
         {pages.map(page => (
@@ -33,6 +36,7 @@ function App() {
           />
         ))}
       </Routes>
+      <Footer/>
     </Router>
   );
 }

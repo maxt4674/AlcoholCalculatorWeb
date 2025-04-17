@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../css/calculatorsPage.css';
 
 const Calculators = ({ slug }) => {
   const [content, setContent] = useState('');
@@ -11,9 +12,17 @@ const Calculators = ({ slug }) => {
   }, [slug]);
 
   return (
-    <div>
-      <h1>{slug.toUpperCase()}</h1>
-      <p>{content}</p>
+    <div className='calcPage'>
+      <div className='leftP'>
+
+      </div>
+      <div className='centerP'>
+        <h1>{slug.toUpperCase()}</h1>
+        <p>{content}</p>
+      </div>
+      <div className='rightP'>
+
+      </div>
     </div>
   );
 };

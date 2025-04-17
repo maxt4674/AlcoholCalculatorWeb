@@ -1,0 +1,17 @@
+.hPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.leftP {
+    width: 22%;
+}
+
+.rightP {
+    width: 22%;
+}
+
+.centerP {
+    width: 56%;
+}
