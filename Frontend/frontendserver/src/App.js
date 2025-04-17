@@ -10,6 +10,7 @@ import Home from './pages/homepage';
 import Navbar from './components/navbar/navbarElements';
 import Calculators from './pages/calculatorsPage';
 import Footer from './components/footer/footer';
+import NotFound from './pages/NotFound';
 
 function App() {
   const [pages, setPages] = useState([]);
@@ -35,6 +36,7 @@ function App() {
             element={<Calculators slug={page.slug} />}
           />
         ))}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer/>
     </Router>
