@@ -1,55 +1,81 @@
-import React from "react";
-import { NavLink as Link } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Nav,
+  NavLink,
+  NavMenu,
+  SearchContainer,
+  SearchInput,
+  Dropdown,
+  DropdownItem,
+} from "./navbarHelp";
+import axios from "axios";
 
 const Navbar = () => {
-    return (
-        <>
-            <Nav>
-                <NavMenu>
-                    <NavLink to="/" activeStyle>
-                        Home
-                    </NavLink>
-                </NavMenu>
-            </Nav>
-        </>
-    );
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [query]);
+
+  useEffect(() => {
+    if (!debouncedQuery) {
+      setResults([]);
+      return;
+    }
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/api/calculators?search=${debouncedQuery}`);
+        setResults(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchData();
+  }, [debouncedQuery]);
+
+  const handleChange = (e) => setQuery(e.target.value);
+  const handleNavigate = (path) => {
+    navigate(path);
+    setQuery("");
+    setResults([]);
+  };
+
+  return (
+    <Nav>
+      <NavMenu>
+        <NavLink to="/" end>
+          Home
+        </NavLink>
+        <SearchContainer>
+          <SearchInput
+            type="text"
+            placeholder="Search calculators..."
+            value={query}
+            onChange={handleChange}
+          />
+          {results.length > 0 && (
+            <Dropdown>
+              {results.map((item) => (
+                <DropdownItem
+                  key={item.id}
+                  onClick={() => handleNavigate(item.path)}
+                >
+                  {item.name}
+                </DropdownItem>
+              ))}
+            </Dropdown>
+          )}
+        </SearchContainer>
+      </NavMenu>
+    </Nav>
+  );
 };
-
-const Nav = styled.nav`
-    background:rgb(0, 168, 165);
-    height: 85px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.2rem calc((100vw - 1000px) / 2);
-    z-index: 12;
-`;
-
-const NavLink = styled(Link)`
-    color: #808080;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 0 1rem;
-    height: 100%;
-    cursor: pointer;
-    &.active {
-        color: #4d4dff;
-    }
-`;
-
-const NavMenu = styled.div`
-    display: flex;
-    align-items: center;
-    margin-right: -24px;
-    /* Second Nav */
-    /* margin-right: 24px; */
-    /* Third Nav */
-    /* width: 100vw;
-white-space: nowrap; */
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
-`;
 
 export default Navbar;

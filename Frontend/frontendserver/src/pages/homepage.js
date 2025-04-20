@@ -10,6 +10,29 @@ const Home = () => {
       <h1>Welcome to the Alch Calc</h1>
       <h2>What you can do:</h2>
       <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
+      <p>Lorem impsum blah blah</p>
     </div>
     <div className='rightP'>
 
