@@ -17,15 +17,25 @@ public class pageController {
     }
 
     @GetMapping
-    public List<PageInfo> getPages() {
-        return pageRepository.findAll()
-            .stream()
+    public List<PageInfo> getPages(@RequestParam(required = false) String search) {
+        List<Page> pages;
+        
+        if (search == null || search.isBlank()) {
+            // If search is empty or null, return all pages
+            pages = pageRepository.findAll();
+        } else {
+            // Otherwise, filter pages by title
+            pages = pageRepository.findByTitleContainingIgnoreCase(search);
+        }
+    
+        return pages.stream()
             .map(p -> new PageInfo(p.getSlug(), p.getTitle()))
             .toList();
     }
 
     @GetMapping("/{slug}")
     public PageContent getPageContent(@PathVariable String slug) {
+        @SuppressWarnings("unused")
         Page page = pageRepository.findBySlug(slug);
         return new PageContent(slug, "This is the content for " + slug);
     }

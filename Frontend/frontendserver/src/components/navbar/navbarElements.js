@@ -30,8 +30,9 @@ const Navbar = () => {
       return;
     }
     const fetchData = async () => {
+      console.log("Fetching data for:", debouncedQuery); // Debugging line
       try {
-        const res = await axios.get(`/api/calculators?search=${debouncedQuery}`);
+        const res = await axios.get(`/api/pages?search=${debouncedQuery}`);
         setResults(res.data);
       } catch (err) {
         console.error(err);
@@ -40,11 +41,14 @@ const Navbar = () => {
     fetchData();
   }, [debouncedQuery]);
 
+  // Handle input changes
   const handleChange = (e) => setQuery(e.target.value);
-  const handleNavigate = (path) => {
-    navigate(path);
+
+  // Navigate to the selected page
+  const handleNavigate = (slug) => {
+    navigate(`${slug}`);
     setQuery("");
-    setResults([]);
+    setResults([]); 
   };
 
   return (
@@ -56,7 +60,7 @@ const Navbar = () => {
         <SearchContainer>
           <SearchInput
             type="text"
-            placeholder="Search calculators..."
+            placeholder="Search Calculators"
             value={query}
             onChange={handleChange}
           />
@@ -64,10 +68,10 @@ const Navbar = () => {
             <Dropdown>
               {results.map((item) => (
                 <DropdownItem
-                  key={item.id}
-                  onClick={() => handleNavigate(item.path)}
+                  key={item.slug}
+                  onClick={() => handleNavigate(item.slug)} 
                 >
-                  {item.name}
+                  {item.title}  {}
                 </DropdownItem>
               ))}
             </Dropdown>
