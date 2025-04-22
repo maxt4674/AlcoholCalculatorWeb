@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vmin;
 }
 
 .leftP {
@@ -15,4 +14,12 @@
 
 .centerP {
     width: 56%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    min-height: 900px;
+}
+
+.calcContent {
+    padding: 60px;
 }

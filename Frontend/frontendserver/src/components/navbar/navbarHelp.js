@@ -10,6 +10,7 @@ export const Nav = styled.nav`
     z-index: 12;
     position: fixed;
     width: 100%;
+    top: 0;
 `;
 
 export const NavLink = styled(Link)`

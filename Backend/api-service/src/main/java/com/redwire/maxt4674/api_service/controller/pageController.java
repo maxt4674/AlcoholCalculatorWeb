@@ -35,9 +35,8 @@ public class pageController {
 
     @GetMapping("/{slug}")
     public PageContent getPageContent(@PathVariable String slug) {
-        @SuppressWarnings("unused")
         Page page = pageRepository.findBySlug(slug);
-        return new PageContent(slug, "This is the content for " + slug);
+        return new PageContent(slug, page.getTitle());
     }
 
     public record PageInfo(String slug, String title) {}

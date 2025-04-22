@@ -71,7 +71,7 @@ const Navbar = () => {
                   key={item.slug}
                   onClick={() => handleNavigate(item.slug)} 
                 >
-                  {item.title}  {}
+                  {item.slug}  {}
                 </DropdownItem>
               ))}
             </Dropdown>
