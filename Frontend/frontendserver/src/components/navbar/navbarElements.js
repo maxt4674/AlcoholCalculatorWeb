@@ -77,6 +77,9 @@ const Navbar = () => {
             </Dropdown>
           )}
         </SearchContainer>
+        <NavLink to="/CalcPage" end>
+          Calc Creation
+        </NavLink>
       </NavMenu>
     </Nav>
   );

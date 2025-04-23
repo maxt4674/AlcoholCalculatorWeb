@@ -2,6 +2,9 @@ package com.redwire.maxt4674.api_service.controller;
 
 import com.redwire.maxt4674.api_service.model.Page;
 import com.redwire.maxt4674.api_service.repository.PageRepository;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,9 +37,27 @@ public class pageController {
     }
 
     @GetMapping("/{slug}")
-    public PageContent getPageContent(@PathVariable String slug) {
+    public ResponseEntity<PageContent> getPageContent(@PathVariable String slug) {
         Page page = pageRepository.findBySlug(slug);
-        return new PageContent(slug, page.getTitle());
+        if (page == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Return 404 if not found
+        }
+        return ResponseEntity.ok(new PageContent(slug, page.getTitle()));
+    }
+
+    @GetMapping("/check/{slug}")
+    public ResponseEntity<String> checkSlugExists(@PathVariable String slug) {
+        Page page = pageRepository.findBySlug(slug);
+        if (page != null) {
+            return ResponseEntity.status(400).body("Slug already exists");
+        }
+        return ResponseEntity.ok("Slug is available");
+    }
+
+    @PostMapping
+    public ResponseEntity<Page> createPage(@RequestBody Page page) {
+        Page savedPage = pageRepository.save(page);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedPage);
     }
 
     public record PageInfo(String slug, String title) {}

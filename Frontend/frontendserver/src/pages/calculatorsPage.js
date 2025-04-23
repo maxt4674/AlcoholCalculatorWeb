@@ -3,7 +3,6 @@ import axios from 'axios';
 import '../css/calculatorsPage.css';
 
 const inputTypes = {
-  0: 'text',
   1: 'text',
   2: 'number'
 };

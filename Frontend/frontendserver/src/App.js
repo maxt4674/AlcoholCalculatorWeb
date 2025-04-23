@@ -11,6 +11,7 @@ import Navbar from './components/navbar/navbarElements';
 import Calculators from './pages/calculatorsPage';
 import Footer from './components/footer/footer';
 import NotFound from './pages/NotFound';
+import CalcPage from './pages/editCalcPage';
 
 function App() {
   const [pages, setPages] = useState([]);
@@ -29,6 +30,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
+        <Route path="/CalcPage" element={<CalcPage/>}></Route>
         {pages.map(page => (
           <Route
             key={page.slug}
