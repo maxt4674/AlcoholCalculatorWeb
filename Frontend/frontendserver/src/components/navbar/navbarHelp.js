@@ -2,37 +2,42 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-    background: rgb(0, 168, 165);
-    height: 85px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.2rem calc((100vw - 1000px) / 2);
-    z-index: 12;
-    position: fixed;
-    width: 100%;
-    top: 0;
+  background: rgb(0, 168, 165);
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem calc((100vw - 1000px) / 2);
+  z-index: 12;
+  position: fixed;
+  width: 100%;
+  top: 0;
 `;
 
 export const NavLink = styled(Link)`
-    color: #808080;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 0 1rem;
-    height: 100%;
-    cursor: pointer;
-    &.active {
-        color: #4d4dff;
-    }
+  color: #808080;
+  display: flex;
+  align-items: left;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font: inherit;
+
+  &.active {
+    color: #4d4dff;
+  }
+
+  &:hover {
+    color: #333;
+  }
 `;
 
 export const NavMenu = styled.div`
     display: flex;
     align-items: center;
-    margin-right: -24px;
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
 `;
 
 export const SearchContainer = styled.div`
@@ -40,6 +45,7 @@ export const SearchContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 250px;
+    margin-right: 10px;
 `;
 
 export const SearchInput = styled.input`
@@ -68,4 +74,11 @@ export const DropdownItem = styled.div`
     &:hover {
         background-color: #f0f0f0;
     }
+`;
+
+export const RightNav = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 200px;
+  gap: 1rem;
 `;

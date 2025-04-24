@@ -8,10 +8,13 @@ import {
   SearchInput,
   Dropdown,
   DropdownItem,
+  RightNav,
 } from "./navbarHelp";
+import { useAuth } from '../Authentication/authContext';
 import axios from 'axios';
 
 const Navbar = () => {
+  const { isAuthenticated, logout } = useAuth();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [debouncedQuery, setDebouncedQuery] = useState(query);
@@ -54,9 +57,7 @@ const Navbar = () => {
   return (
     <Nav>
       <NavMenu>
-        <NavLink to="/" end>
-          Home
-        </NavLink>
+        <NavLink to="/" end>Home</NavLink>
         <SearchContainer>
           <SearchInput
             type="text"
@@ -67,19 +68,26 @@ const Navbar = () => {
           {results.length > 0 && (
             <Dropdown>
               {results.map((item) => (
-                <DropdownItem
-                  key={item.slug}
-                  onClick={() => handleNavigate(item.slug)} 
-                >
-                  {item.slug}  {}
+                <DropdownItem key={item.slug} onClick={() => handleNavigate(item.slug)}>
+                  {item.slug}
                 </DropdownItem>
               ))}
             </Dropdown>
           )}
         </SearchContainer>
-        <NavLink to="/CalcPage" end>
-          Calc Creation
-        </NavLink>
+        {isAuthenticated && (
+          <NavLink to="/CalcPage" end>Calc Creation</NavLink>
+        )}
+        <RightNav>
+          {isAuthenticated ? (
+            <NavLink as="button" onClick={logout}>Logout</NavLink>
+          ) : (
+            <>
+              <NavLink to="/login" end>Login</NavLink>
+              <NavLink to="/register" end>Register</NavLink>
+            </>
+          )}
+        </RightNav>
       </NavMenu>
     </Nav>
   );

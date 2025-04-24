@@ -6,7 +6,7 @@ export default function NotFound() {
     <div className='notfound'>
       <h1>404 - Not Found</h1>
       <p>This page does not exist.</p>
-      <p>Use navbar to go to another page or click below to return home</p>
+      <p>Click below to return home</p>
       <a href="/">Return Home</a>
     </div>
   );

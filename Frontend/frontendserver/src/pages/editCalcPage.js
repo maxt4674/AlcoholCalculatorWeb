@@ -60,7 +60,7 @@ const CalcPage = () => {
     }
 
     const calc = `CALC=${expression}|${label}`;
-    const fullElements = [...elements, '2Calculate', calc]; // Automatically adds Calculate button
+    const fullElements = [...elements, '2Calculate', calc]; 
     const instruction = `${calcTitle}|${calcDescription}|${fullElements.join(',')}`;
     setPreview(instruction);
   };
