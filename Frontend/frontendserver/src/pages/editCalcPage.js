@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Importing axios
+import axios from 'axios';
 import '../css/editCalculatorsPage.css';
 
 const CalcPage = () => {
   const [elements, setElements] = useState([]);
   const [expression, setExpression] = useState('');
   const [label, setLabel] = useState('');
+  const [calcTitle, setCalcTitle] = useState('');
+  const [calcDescription, setCalcDescription] = useState('');
   const [preview, setPreview] = useState('');
   const [inputCount, setInputCount] = useState(1);
   const [multiInputs, setMultiInputs] = useState([{ label: '', type: '1' }]);
-  const [buttonLabel, setButtonLabel] = useState('');
   const [slug, setSlug] = useState('');
 
   const isValidFieldName = (name) => /^[^,|]+$/.test(name);
@@ -17,10 +18,6 @@ const CalcPage = () => {
 
   const addInput = (fieldName, inputType) => {
     setElements(prev => [...prev, `1${fieldName}${inputType}`]);
-  };
-
-  const addButton = (label) => {
-    setElements(prev => [...prev, `2${label}`]);
   };
 
   const handleInputCountChange = (count) => {
@@ -56,18 +53,15 @@ const CalcPage = () => {
     setInputCount(1);
   };
 
-  const handleAddButton = () => {
-    if (!buttonLabel.trim()) {
-      alert("Button label cannot be empty.");
+  const generateInstruction = () => {
+    if (!calcTitle.trim() || !calcDescription.trim()) {
+      alert("Please fill in both the calculator title and description.");
       return;
     }
-    addButton(buttonLabel);
-    setButtonLabel('');
-  };
 
-  const generateInstruction = () => {
     const calc = `CALC=${expression}|${label}`;
-    const instruction = [...elements, calc].join(',');
+    const fullElements = [...elements, '2Calculate', calc]; // Automatically adds Calculate button
+    const instruction = `${calcTitle}|${calcDescription}|${fullElements.join(',')}`;
     setPreview(instruction);
   };
 
@@ -78,15 +72,13 @@ const CalcPage = () => {
     }
 
     try {
-      // Check if the slug already exists in the backend
-      const checkResponse = await axios.get(`http://localhost:8080/api/pages/check/${slug}`);
+      const checkResponse = await axios.get(`/pages/check/${slug}`);
       if (checkResponse.status != 200) {
         alert("Slug already exists. Please choose another one.");
         return;
       }
 
-      // If slug is unique, proceed to create the page
-      const response = await axios.post('http://localhost:8080/api/pages', {
+      const response = await axios.post('/pages', {
         slug: slug,
         title: preview,
       });
@@ -103,6 +95,26 @@ const CalcPage = () => {
       <h2>Create Your Page</h2>
 
       <div className="inputSection">
+        <h3>Add a Calculator Title and Description for the page</h3>
+        <label>
+          Calculator Title:
+          <input
+            type="text"
+            placeholder="Title"
+            value={calcTitle}
+            onChange={(e) => setCalcTitle(e.target.value)}
+          />
+        </label><br />
+        <label>
+          Calculator Description:
+        </label><br />
+        <textarea
+          placeholder="Enter a brief description of this calculator"
+          value={calcDescription}
+          onChange={e => setCalcDescription(e.target.value)}
+          rows={3}
+        />
+
         <h3>Add Input Fields</h3>
         <label>
           Number of Fields:
@@ -135,17 +147,6 @@ const CalcPage = () => {
         <button onClick={handleAddMultipleInputs}>Add Inputs</button>
       </div>
 
-      <div className="buttonSection">
-        <h3>Add Submit Button</h3>
-        <input
-          type="text"
-          placeholder="Button Label"
-          value={buttonLabel}
-          onChange={e => setButtonLabel(e.target.value)}
-        />
-        <button onClick={handleAddButton}>Add Button</button>
-      </div>
-
       <div className="calcSection">
         <h3>Calculation</h3>
         <input
@@ -153,13 +154,13 @@ const CalcPage = () => {
           placeholder="Expression (e.g. AlchVol * 3)"
           value={expression}
           onChange={e => setExpression(e.target.value)}
-        />
+        /><br/>
         <input
           type="text"
           placeholder="Result Label (e.g. Your alch volume is:)"
           value={label}
           onChange={e => setLabel(e.target.value)}
-        />
+        /><br/>
         <button onClick={generateInstruction}>Generate Instruction</button>
       </div>
 

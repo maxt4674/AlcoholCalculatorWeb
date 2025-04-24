@@ -13,9 +13,11 @@ const Calculators = ({ slug }) => {
   const [calcResult, setCalcResult] = useState(null);
   const [calcExpr, setCalcExpr] = useState('');
   const [calcLabel, setCalcLabel] = useState('');
+  const [calcTitle, setCalcTitle] = useState('');
+  const [calcDesc, setCalcDesc] = useState('');
 
   useEffect(() => {
-    axios.get(`/api/pages/${slug}`)
+    axios.get(`/pages/${slug}`)
       .then(res => {
         console.log("Instruction Data:", res.data.content); // Check here
         setInstruction(res.data.content);
@@ -24,13 +26,15 @@ const Calculators = ({ slug }) => {
   }, [slug]);
 
   useEffect(() => {
-    const tokens = instruction.split(',');
+    const parts = instruction.split('|');
+    setCalcLabel(parts[3]);
+    setCalcDesc(parts[1]);
+    setCalcTitle(parts[0]);
+    const tokens = parts[2].split(',');
     const calcToken = tokens.find(t => t.startsWith('CALC='));
     if (calcToken) {
       const fullCalc = calcToken.replace('CALC=', '');
-      const [expression, label] = fullCalc.split('|');
-      setCalcExpr(expression);
-      setCalcLabel(label || 'Result:');
+      setCalcExpr(fullCalc);
     }
   }, [instruction]);
 
@@ -82,9 +86,10 @@ const Calculators = ({ slug }) => {
     <div className="calcPage">
       <div className='leftP'></div>
       <div className="centerP">
-        <h1>{slug.toUpperCase()}</h1>
         {instruction ? (
           <div className="calcContent">
+            <h1>{calcTitle}</h1>
+            <p>{calcDesc}</p>
             {instruction.split(',').map(renderElement)}
             {calcResult !== null && (
               <div className="result">

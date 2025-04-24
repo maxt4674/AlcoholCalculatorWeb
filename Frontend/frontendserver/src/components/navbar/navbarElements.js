@@ -9,7 +9,7 @@ import {
   Dropdown,
   DropdownItem,
 } from "./navbarHelp";
-import axios from "axios";
+import axios from 'axios';
 
 const Navbar = () => {
   const [query, setQuery] = useState("");
@@ -32,7 +32,7 @@ const Navbar = () => {
     const fetchData = async () => {
       console.log("Fetching data for:", debouncedQuery); // Debugging line
       try {
-        const res = await axios.get(`/api/pages?search=${debouncedQuery}`);
+        const res = await axios.get(`/pages?search=${debouncedQuery}`);
         setResults(res.data);
       } catch (err) {
         console.error(err);

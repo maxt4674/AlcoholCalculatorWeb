@@ -17,7 +17,7 @@ function App() {
   const [pages, setPages] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/pages')
+    axios.get('/pages')
       .then(res => {
         console.log(res.data);
         setPages(res.data);
