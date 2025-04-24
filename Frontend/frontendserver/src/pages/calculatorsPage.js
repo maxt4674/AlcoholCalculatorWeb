@@ -19,18 +19,28 @@ const Calculators = ({ slug }) => {
   useEffect(() => {
     axios.get(`/pages/${slug}`)
       .then(res => {
-        console.log("Instruction Data:", res.data.content); // Check here
+        console.log("Instruction Data:", res.data.content); 
         setInstruction(res.data.content);
       })
       .catch(err => console.error(err));
   }, [slug]);
 
   useEffect(() => {
+    if (!instruction) return;
+  
     const parts = instruction.split('|');
-    setCalcLabel(parts[3]);
-    setCalcDesc(parts[1]);
-    setCalcTitle(parts[0]);
-    const tokens = parts[2].split(',');
+  
+    if (parts.length < 4) {
+      console.warn("Instruction format is incomplete:", parts);
+      return;
+    }
+  
+    const [title, desc, inputs, label] = parts;
+    setCalcTitle(title);
+    setCalcDesc(desc);
+    setCalcLabel(label);
+  
+    const tokens = inputs.split(',');
     const calcToken = tokens.find(t => t.startsWith('CALC='));
     if (calcToken) {
       const fullCalc = calcToken.replace('CALC=', '');
@@ -55,12 +65,14 @@ const Calculators = ({ slug }) => {
   };
 
   const renderElement = (token, index) => {
-    if (token.startsWith('CALC=')) return null;
+    if (!token || token.startsWith('CALC=')) return null;
 
+    console.log(token);
+  
     const type = token[0];
-    const content = token.slice(1, -1);
     const inputType = token.slice(-1);
-
+    const content = token.substring(1, token.length - 1);
+  
     if (type === '1') {
       return (
         <div key={index} className="formField">
@@ -75,10 +87,11 @@ const Calculators = ({ slug }) => {
     } else if (type === '2') {
       return (
         <button key={index} onClick={handleSubmit}>
-          Calculate
+          {'Calculate'}
         </button>
       );
     }
+  
     return null;
   };
 
@@ -90,7 +103,7 @@ const Calculators = ({ slug }) => {
           <div className="calcContent">
             <h1>{calcTitle}</h1>
             <p>{calcDesc}</p>
-            {instruction.split(',').map(renderElement)}
+            {instruction.split('|')[2].split(',').map(renderElement)}
             {calcResult !== null && (
               <div className="result">
                 <strong>{calcLabel}</strong> {calcResult}
