@@ -10,6 +10,8 @@ import PrivateRoute from './components/Authentication/privateRoute';
 import Login from './pages/login';
 import Layout from './components/Layout/layout';
 import Register from './pages/register';
+import Account from './pages/account';
+import AdminRoute from './components/Authentication/adminRoute';
 import { useAuth } from './components/Authentication/authContext';
 
 function App() {
@@ -40,7 +42,11 @@ function App() {
 
           <Route
             path="/CalcPage"
-            element={<PrivateRoute element={<CalcPage />} />}
+            element={<AdminRoute element={<CalcPage />} />}
+          />
+          <Route
+            path="/account"
+            element={<PrivateRoute element={<Account/>}/>}
           />
 
           {loading ? (

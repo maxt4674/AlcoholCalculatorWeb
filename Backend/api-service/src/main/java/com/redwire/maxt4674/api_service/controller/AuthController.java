@@ -1,6 +1,7 @@
 package com.redwire.maxt4674.api_service.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import com.redwire.maxt4674.api_service.dto.LoginRequest;
 import com.redwire.maxt4674.api_service.dto.LoginResponse;
 import com.redwire.maxt4674.api_service.dto.RegisterRequest;
 import com.redwire.maxt4674.api_service.exception.UserAlreadyExistsException;
+import com.redwire.maxt4674.api_service.exception.UserNotFoundException;
 import com.redwire.maxt4674.api_service.security.JwtUtil;
 import com.redwire.maxt4674.api_service.service.UserService;
 
@@ -32,10 +34,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest req) {
-        var user = userService.authenticate(req.username(), req.password());
-        var token = jwtUtil.generateToken(user.getUsername());
-        return ResponseEntity.ok(new LoginResponse(
-                token, user.getUsername(), user.getEmail(), user.getUserType().name()
-        ));
+        try {
+            var user = userService.authenticate(req.username(), req.password());
+            var token = jwtUtil.generateToken(user.getUsername(), user.getEmail() ,user.getUserType().name());
+            return ResponseEntity.ok(new LoginResponse(
+                    token, user.getUsername(), user.getEmail(), user.getUserType().name()
+            ));
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+        }
     }
 }

@@ -14,7 +14,7 @@ import { useAuth } from '../Authentication/authContext';
 import axios from 'axios';
 
 const Navbar = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [debouncedQuery, setDebouncedQuery] = useState(query);
@@ -44,10 +44,8 @@ const Navbar = () => {
     fetchData();
   }, [debouncedQuery]);
 
-  // Handle input changes
   const handleChange = (e) => setQuery(e.target.value);
 
-  // Navigate to the selected page
   const handleNavigate = (slug) => {
     navigate(`${slug}`);
     setQuery("");
@@ -75,12 +73,15 @@ const Navbar = () => {
             </Dropdown>
           )}
         </SearchContainer>
-        {isAuthenticated && (
+        {isAuthenticated && user.userType === 'ADMIN' && (
           <NavLink to="/CalcPage" end>Calc Creation</NavLink>
         )}
         <RightNav>
           {isAuthenticated ? (
-            <NavLink as="button" onClick={logout}>Logout</NavLink>
+            <>
+              <NavLink to="/account" end>Account</NavLink>
+              <NavLink as="button" onClick={logout}>Logout</NavLink>
+            </>
           ) : (
             <>
               <NavLink to="/login" end>Login</NavLink>

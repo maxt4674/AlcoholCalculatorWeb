@@ -12,9 +12,11 @@ public class JwtUtil {
     private final String secret = "super-secret"; // store in env!
     private final long exp = 1000 * 60 * 60 * 24;
 
-    public String generateToken(String username) {
+    public String generateToken(String username, String email, String userType) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("userType", userType)
+                .claim("email", email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + exp))
                 .signWith(SignatureAlgorithm.HS256, secret)

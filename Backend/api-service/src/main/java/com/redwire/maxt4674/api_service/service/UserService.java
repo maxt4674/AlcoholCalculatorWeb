@@ -8,6 +8,7 @@ import com.redwire.maxt4674.api_service.dto.RegisterRequest;
 import com.redwire.maxt4674.api_service.model.User;
 import com.redwire.maxt4674.api_service.repository.UserRepository;
 import com.redwire.maxt4674.api_service.exception.UserAlreadyExistsException;
+import com.redwire.maxt4674.api_service.exception.UserNotFoundException;
 
 @Service
 public class UserService {
@@ -35,7 +36,7 @@ public class UserService {
 
     public User authenticate(String username, String rawPassword) {
         var user = userRepo.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException(username));
         
         if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
             throw new RuntimeException("Invalid credentials");

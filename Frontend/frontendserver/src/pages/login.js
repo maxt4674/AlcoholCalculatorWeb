@@ -7,20 +7,26 @@ const Login = () => {
   const { login } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setErrorMsg('');
+
     try {
       const res = await axios.post('/auth/login', { username, password });
 
       const token = res.data.token;
 
       login(token);
-
       navigate('/');
-
     } catch (err) {
+      if (err.response && err.response.status === 401) {
+        setErrorMsg('Invalid username or password.');
+      } else {
+        setErrorMsg('An unexpected error occurred. Please try again.');
+      }
       console.error('Login failed:', err);
     }
   };
@@ -43,6 +49,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        {errorMsg && <p style={{ color: 'red' }}>{errorMsg}</p>}
         <button type="submit">Log In</button>
       </form>
       <br />
