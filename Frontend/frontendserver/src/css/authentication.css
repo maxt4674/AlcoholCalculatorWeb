@@ -1,0 +1,75 @@
+.Mainpage {
+    background-color: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin: 4rem auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+  
+.Mainpage h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #333;
+}
+  
+.Mainpage form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+  
+.Mainpage input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    transition: border 0.3s ease;
+}
+  
+.Mainpage input:focus {
+    border-color: rgb(16, 57, 84);
+    outline: none;
+}
+  
+.Mainpage button {
+    padding: 0.75rem;
+    background-color: #005fcc;
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.Mainpage button:hover {
+    background-color: rgb(16, 57, 84);
+}
+  
+.Mainpage p {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: rgb(16, 57, 84);
+}
+  
+.Mainpage a {
+    display: inline-block;
+    margin-top: 0.3rem;
+    color: #005fcc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+  
+.Mainpage a:hover {
+    color: rgb(16, 57, 84);
+    text-decoration: underline;
+}
+  
+.Mainpage p + a {
+    margin-bottom: 0.5rem;
+}

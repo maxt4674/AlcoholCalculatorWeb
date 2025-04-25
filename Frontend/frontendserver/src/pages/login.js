@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../components/Authentication/authContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import "../css/authentication.css";
 
 const Login = () => {
   const { login } = useAuth();
@@ -32,8 +33,8 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page">
-      <h2>Login</h2>
+    <div className="Mainpage">
+      <h3>Login</h3>
       <form onSubmit={handleLogin}>
         <input
           type="text"

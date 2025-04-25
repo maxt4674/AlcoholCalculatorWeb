@@ -2,7 +2,7 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  background: rgb(0, 168, 165);
+  background: rgb(202, 231, 250);
   height: 85px;
   display: flex;
   align-items: center;
@@ -12,27 +12,40 @@ export const Nav = styled.nav`
   position: fixed;
   width: 100%;
   top: 0;
+
 `;
 
 export const NavLink = styled(Link)`
   color: #808080;
   display: flex;
-  align-items: left;
+  align-items: center;
   text-decoration: none;
-  padding: 0 1rem;
-  height: 100%;
+  padding: 8px 12px;
+  height: 25px; 
   cursor: pointer;
   background: none;
   border: none;
   font: inherit;
+  border-radius: 5px;
+  transition: background 0.3s ease, color 0.3s ease;
+  margin: 8px;
+  margin-left: 10px;
 
   &.active {
     color: #4d4dff;
+    border: 1px solid #ccc;
+    padding: 7px 11px;
+    background-color: rgb(166, 220, 255);
   }
 
   &:hover {
     color: #333;
+    background-color: rgb(166, 220, 255);
+    border: 1px solid #ccc;
+    padding: 7px 11px;
+    text-decoration: underline;
   }
+
 `;
 
 export const NavMenu = styled.div`
@@ -53,6 +66,7 @@ export const SearchInput = styled.input`
     border-radius: 5px;
     border: 1px solid #ccc;
     width: 100%;
+    height: 25px;
 `;
 
 export const Dropdown = styled.div`
@@ -79,6 +93,6 @@ export const DropdownItem = styled.div`
 export const RightNav = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 200px;
+  margin-left: 180px;
   gap: 1rem;
 `;

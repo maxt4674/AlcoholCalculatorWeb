@@ -1,6 +1,6 @@
 .hPage {
     display: flex;
-    margin-top: 90px;
+    margin-top: 100px;
 }
 
 .leftP {
@@ -13,4 +13,45 @@
 
 .centerP {
     width: 56%;
+    color: rgb(16, 57, 84);
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+
+.centerP h1, .centerP h2 {
+    margin-left: 10%;
+    text-align: left;
+    justify-self: left;
+}
+
+.centerP h2 {
+    text-decoration: underline;
+}
+
+.features {
+    width: 90%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.features button {
+    width: 25%;
+    margin-right: 5%;
+    height: 200px;
+    border-radius: 20px;
+    font-size: large;
+    text-align: center;
+    background: linear-gradient(to bottom, #f1f1f1, #ffffff00);
+    border: 1px solid #ccc;
+    color: rgb(16, 57, 84);
+}
+
+.features button:hover,
+.features button:focus {
+    border: 2px solid rgb(16, 57, 84);
+    text-decoration: underline;
+    color: #4d4dff;
 }

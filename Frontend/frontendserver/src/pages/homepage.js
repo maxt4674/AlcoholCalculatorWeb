@@ -4,38 +4,19 @@ import '../css/homepage.css';
 const Home = () => {
   return <div className='hPage'>
     <div className='leftP'>
-
     </div>
     <div className='centerP'>
-    <h1>Welcome to the Alch Calc</h1>
-      <h2>What you can do:</h2>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
-      <p>Lorem impsum blah blah</p>
+      <h1>Welcome to the Alch Calc</h1>
+      <h2>Features</h2>
+      <div className='features'>
+  	    <button>Calculators</button>
+        <button>Brewing Data</button>
+        <button>Marketplace</button>
+      </div>
+      <h2>About Us</h2>
+      <p>---Put Stuff Here---</p>
     </div>
     <div className='rightP'>
-
     </div>
   </div>;
 };
