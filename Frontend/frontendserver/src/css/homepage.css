@@ -16,9 +16,10 @@
     color: rgb(16, 57, 84);
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
+    min-height: 900px;
 }
 
-.centerP h1, .centerP h2 {
+.centerP h1, .centerP h2, .centerP p {
     margin-left: 10%;
     text-align: left;
     justify-self: left;

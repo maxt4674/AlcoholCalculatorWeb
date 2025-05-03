@@ -11,9 +11,14 @@ const Account = () => {
 
   return (
     <div className='accountPage'>
-        <h2>Username: {user.username}</h2>
+      <div className='leftP'></div>
+      <div className='centerP'>
+        <h2>Account Details</h2>
+        <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
         <p>User Type: {user.userType}</p>
+      </div>
+      <div className='rightP'></div>
     </div>
   );
 };

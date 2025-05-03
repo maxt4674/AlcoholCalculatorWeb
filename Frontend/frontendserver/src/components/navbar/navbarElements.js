@@ -55,7 +55,7 @@ const Navbar = () => {
   return (
     <Nav>
       <NavMenu>
-        <h1 style={{marginRight: '50px', color: 'rgb(16, 57, 84)'}}>AlchCalc</h1>
+        <h1 style={{marginRight: '50px', color: 'rgb(16, 57, 84)'}}>Braxeator</h1>
         <NavLink to="/" end>Home</NavLink>
         <SearchContainer>
           <SearchInput
@@ -75,13 +75,13 @@ const Navbar = () => {
           )}
         </SearchContainer>
         {isAuthenticated && user.userType === 'ADMIN' && (
-          <NavLink to="/CalcPage" end style={{marginLeft: '15px'}}>Calc Creation</NavLink>
+          <NavLink to="/CalcPage" end style={{marginLeft: '15px'}}>Calculator Creation</NavLink>
         )}
         <RightNav>
           {isAuthenticated ? (
             <>
               <NavLink to="/account" end>Account</NavLink>
-              <NavLink as="button" onClick={logout} style={{height: '25px', padding: '8px 12px'}}>Logout</NavLink>
+              <NavLink as="button" onClick={logout} style={{height: '40px', padding: '8px 12px'}}>Logout</NavLink>
             </>
           ) : (
             <>

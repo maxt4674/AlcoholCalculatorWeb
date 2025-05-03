@@ -98,7 +98,7 @@ const Calculators = ({ slug }) => {
   return (
     <div className="calcPage">
       <div className='leftP'></div>
-      <div className="centerP">
+      <div className="centerP2">
         {instruction ? (
           <div className="calcContent">
             <h1>{calcTitle}</h1>

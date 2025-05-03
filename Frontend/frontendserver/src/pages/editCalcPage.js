@@ -92,100 +92,104 @@ const CalcPage = () => {
 
   return (
     <div className="calcSetupPage">
-      <h2>Create Your Page</h2>
+      <div className='leftP'></div>
+      <div className='centerP2'>
+        <h2>Create Your Page</h2>
 
-      <div className="inputSection">
-        <h3>Add a Calculator Title and Description for the page</h3>
-        <label>
-          Calculator Title:
-          <input
-            type="text"
-            placeholder="Title"
-            value={calcTitle}
-            onChange={(e) => setCalcTitle(e.target.value)}
-          />
-        </label><br />
-        <label>
-          Calculator Description:
-        </label><br />
-        <textarea
-          placeholder="Enter a brief description of this calculator"
-          value={calcDescription}
-          onChange={e => setCalcDescription(e.target.value)}
-          rows={3}
-        />
-
-        <h3>Add Input Fields</h3>
-        <label>
-          Number of Fields:
-          <input
-            type="number"
-            min="1"
-            value={inputCount}
-            onChange={(e) => handleInputCountChange(e.target.value)}
-          />
-        </label>
-
-        {multiInputs.map((input, idx) => (
-          <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '4px', justifyContent: 'center', marginTop: '4px' }}>
+        <div className="inputSection">
+          <h3>Add a Calculator Title and Description for the page</h3>
+          <label>
+            Calculator Title:
             <input
               type="text"
-              placeholder={`Label ${idx + 1}`}
-              value={input.label}
-              onChange={e => handleMultiInputChange(idx, 'label', e.target.value)}
+              placeholder="Title"
+              value={calcTitle}
+              onChange={(e) => setCalcTitle(e.target.value)}
             />
-            <select
-              value={input.type}
-              onChange={e => handleMultiInputChange(idx, 'type', e.target.value)}
-            >
-              <option value="1">Text</option>
-              <option value="2">Number</option>
-            </select>
-          </div>
-        ))}
+          </label><br />
+          <label>
+            Calculator Description:
+          </label><br />
+          <textarea
+            placeholder="Enter a brief description of this calculator"
+            value={calcDescription}
+            onChange={e => setCalcDescription(e.target.value)}
+            rows={3}
+          />
 
-        <button onClick={handleAddMultipleInputs}>Add Inputs</button>
-      </div>
+          <h3>Add Input Fields</h3>
+          <label>
+            Number of Fields:
+            <input
+              type="number"
+              min="1"
+              value={inputCount}
+              onChange={(e) => handleInputCountChange(e.target.value)}
+            />
+          </label>
 
-      <div className="calcSection">
-        <h3>Calculation</h3>
-        <input
-          type="text"
-          placeholder="Expression (e.g. AlchVol * 3)"
-          value={expression}
-          onChange={e => setExpression(e.target.value)}
-        /><br/>
-        <input
-          type="text"
-          placeholder="Result Label (e.g. Your alch volume is:)"
-          value={label}
-          onChange={e => setLabel(e.target.value)}
-        /><br/>
-        <button onClick={generateInstruction}>Generate Instruction</button>
-      </div>
+          {multiInputs.map((input, idx) => (
+            <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '4px', justifyContent: 'center', marginTop: '4px' }}>
+              <input
+                type="text"
+                placeholder={`Label ${idx + 1}`}
+                value={input.label}
+                onChange={e => handleMultiInputChange(idx, 'label', e.target.value)}
+              />
+              <select
+                value={input.type}
+                onChange={e => handleMultiInputChange(idx, 'type', e.target.value)}
+              >
+                <option value="1">Text</option>
+                <option value="2">Number</option>
+              </select>
+            </div>
+          ))}
 
-      <div className="previewSection">
-        <h3>Instruction Preview</h3>
-        <textarea value={preview} readOnly rows={4} />
-      </div>
+          <button onClick={handleAddMultipleInputs}>Add Inputs</button>
+        </div>
 
-      <div className="slugSection">
-        <h3>Save Page</h3>
-        <input
-          type="text"
-          placeholder="Enter slug name (e.g. alch-volume)"
-          value={slug}
-          onChange={e => setSlug(e.target.value)}
-        />
-        <button onClick={submitToBackend}>Submit to Backend</button>
-      </div>
+        <div className="calcSection">
+          <h3>Calculation</h3>
+          <input
+            type="text"
+            placeholder="Expression (e.g. AlchVol * 3)"
+            value={expression}
+            onChange={e => setExpression(e.target.value)}
+          /><br/>
+          <input
+            type="text"
+            placeholder="Result Label (e.g. Your alch volume is:)"
+            value={label}
+            onChange={e => setLabel(e.target.value)}
+          /><br/>
+          <button onClick={generateInstruction}>Generate Instruction</button>
+        </div>
 
-      <div className="previewList">
-        <h4>Elements Added</h4>
-        <ul>
-          {elements.map((el, idx) => <li key={idx}>{el}</li>)}
-        </ul>
+        <div className="previewSection">
+          <h3>Instruction Preview</h3>
+          <textarea value={preview} readOnly rows={4} />
+        </div>
+
+        <div className="slugSection">
+          <h3>Save Page</h3>
+          <input
+            type="text"
+            placeholder="Enter slug name (e.g. alch-volume)"
+            value={slug}
+            onChange={e => setSlug(e.target.value)}
+          />
+          <button onClick={submitToBackend}>Submit to Backend</button>
+        </div>
+
+        <div className="previewList">
+          <h4>Elements Added</h4>
+          <ul>
+            {elements.map((el, idx) => <li key={idx}>{el}</li>)}
+          </ul>
+        </div>
       </div>
+      <div className='rightP'></div>
     </div>
   );
 };

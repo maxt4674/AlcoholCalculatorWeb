@@ -6,7 +6,7 @@ const Home = () => {
     <div className='leftP'>
     </div>
     <div className='centerP'>
-      <h1>Welcome to the Alch Calc</h1>
+      <h1>Welcome to the Braxeator Calculators</h1>
       <h2>Features</h2>
       <div className='features'>
   	    <button>Calculators</button>

@@ -2,22 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.leftP {
-    width: 22%;
-}
-
-.rightP {
-    width: 22%;
-}
-
-.centerP {
-    width: 56%;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    min-height: 900px;
+    margin-top: 100px;
 }
 
 .calcContent {

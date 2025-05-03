@@ -1,7 +1,13 @@
 .calcSetupPage {
+    display: flex;
+    margin-top: 100px;
+}
+
+.centerP2 {
+    width: 56%;
+    color: rgb(16, 57, 84);
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
     text-align: center;
-    justify-content: center;
-    padding: 20px;
     min-height: 900px;
-    margin-top: 90px;
 }
